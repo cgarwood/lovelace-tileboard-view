@@ -2785,14 +2785,16 @@ class TileboardView extends LitElement {
             </div>`;
     }
     cardStyles(item) {
-        const config = item._config;
+        if (!item._config) {
+            return;
+        }
         let width = 1;
         let height = 1;
         let pos = [0, 0];
-        if (config.view_layout) {
-            width = config.view_layout.width || 1;
-            height = config.view_layout.height || 1;
-            pos = config.view_layout.position || [0, 0];
+        if (item._config.view_layout) {
+            width = item._config.view_layout.width || 1;
+            height = item._config.view_layout.height || 1;
+            pos = item._config.view_layout.position || [0, 0];
         }
         const tileSize = this._config.view_layout.tile_size;
         const tileMargin = this._config.view_layout.tile_margin;
